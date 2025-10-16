@@ -1,0 +1,10 @@
+﻿,Name,Source Zone,Source Address,Destination Zone,Destination Address,Application,Service,URL Category,Action,Profile
+5,from_we-vnet01_Defender,sharedservices,CS-MSO-NE_10.181.128.0_17;CS-MSO-WE_10.181.0.0_17,untrust,NET_51.124.0.0_16,ssl;windows-defender-atp,any,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+7,from_we-vnet01_SQL,sharedservices,H_10.181.32.179,untrust,H_191.234.141.161;H_191.234.142.161,any,tcp-1433,any,Allow,none
+12,from_we-vnet01_AZRPA01  Outbount SFTP - Secure Shell,sharedservices,H_10.181.32.137,untrust,192.188.251.35/32;H_192.188.251.35;FQDN_ftp.blackline.com,any,TCP_22,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+13,from_we-vnet01_mail.hydro.com email relay,sharedservices,H-10.181.32.206;H-10.181.32.207,untrust,H-20.103.11.34;N_40.92.0.0_15;N_40.107.0.0_16;N_52.100.0.0_14;N_104.47.0.0_17,smtp,TCP-25,any,Allow,Profile Group: SPG_Strict_A_AS_VP_WF
+14,from_we-vnet01_mssql,sharedservices,H-10.181.32.45,untrust,H-20.83.42.5;H-52.157.206.206,mssql-db,application-default,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+15,from_we-vnet01_RedCloak,sharedservices,CS-MSO-NE_10.181.128.0_17;CS-MSO-WE_10.181.0.0_17,untrust,SAG_EXT_RedCloak,any,HTTPS;TCP_SH_17234,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+16,from_we-vnet01_Google DNS,sharedservices,azwe-dc01 10.181.32.7;azwe-dc02 10.181.32.8,untrust,d-8.8.4.4;gdns-8.8.8.8,dns,application-default,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+22,from_we-vnet01_tcp_20643,sharedservices,H-10.181.32.45,untrust,H-185.193.26.239,any,TCP-20643,any,Allow,Profile Group: SPG_Strict_A_AS_VP
+23,from_we-vnet01_tcp_222,sharedservices,H-10.181.32.215,untrust,H-62.159.185.149,any,TCP_222,any,Allow,none

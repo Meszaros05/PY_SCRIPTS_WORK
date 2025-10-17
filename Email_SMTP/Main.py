@@ -21,11 +21,12 @@ message = MIMEMultipart()
 message["From"] = sender_email
 message["To"] = receiver_email
 message["Subject"] = subject
+
+
 # Attach the plain text body
 message.attach(MIMEText(body, "plain"))
 
 # Attach the CSV file
-
 try:
     with open(downloads_path, "rb") as file:
         part = MIMEApplication(file.read(), Name=csv_filename)

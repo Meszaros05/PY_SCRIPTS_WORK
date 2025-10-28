@@ -1,6 +1,7 @@
+
 {
-    "name": "GFG",
-    "domain": "geeksforgeeks.org",
-    "office": "Noida",
-    "hiring":true
+  "id": 101,
+  "name": "Test Entity",
+  "type": "sample",
+  "active": false
 }

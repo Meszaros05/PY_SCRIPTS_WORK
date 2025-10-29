@@ -1,21 +1,15 @@
 import os
 import sys
+from Email_SMTP.Email_SMTP import Email #this imports Email function from Email_SMTP
 
-current_folder=os.path.abspath('Main.py')
-parent_folder=os.path.dirname(current_folder)
+def main(): #This is wehere we need to call all 
+    Email()
 
-#Add the module path to sys.path
-JSON_dir=(os.path.join(parent_folder, 'JSON_to_EXCEL'))
 
-sys.path.append(JSON_dir)
+if __name__=="__main___":
+    main()
 
-#from JSON_to_EXCEL import convert_JSON_to_EXCEL
 
-#convert_JSON_to_EXCEL()
-
-JSON=os.path.join(JSON_dir,'test.json')
-
-print(JSON_dir)
 
 
 

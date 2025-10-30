@@ -1,12 +1,16 @@
 import requests
 import json
+import os
+from pathlib import Path
+import re
 
 
-api_url = "https://your-claroty-instance/api/v1/assets"
-api_token = "your_api_token_here"
+#OUTPUT_FILE'S NAME SHOULD BE NAMED AS IT IS DOWNLOADED FROM BROWSER
 
+def Download_JSON(api_url="https://your-claroty-instance/api/v1/assets", api_token="", output_file="claroty_data.json"):
 
-def download_json(api_url, api_token, output_file="claroty_data.json"):
+    #api_url = "https://your-claroty-instance/api/v1/assets"
+    #api_token = "your_api_token_here"
     """
     Downloads JSON data from the Claroty API and saves it to a file.
 
@@ -18,6 +22,19 @@ def download_json(api_url, api_token, output_file="claroty_data.json"):
     Returns:
         bool: True if successful, False otherwise.
     """
+
+    #Delete existing .JSON file
+    pattern = re.compile(r".*\.json$", re.IGNORECASE)
+    main_folder_path=Path(__file__).resolve().parent
+    json_files=[f for f in main_folder_path.iterdir() if pattern.match(f.name)]
+    
+    if json_files:
+        for file in json_files:
+            try:
+                os.remove(file)
+            except Exception as e:
+                print(f"Failed to delete {file}:{e}")
+
     headers = {
         "Authorization": f"Bearer {api_token}",
         "Content-Type": "application/json",
@@ -38,3 +55,6 @@ def download_json(api_url, api_token, output_file="claroty_data.json"):
     except requests.exceptions.RequestException as e:
         print(f"❌ Failed to fetch data: {e}")
         return False
+
+
+Download_JSON()

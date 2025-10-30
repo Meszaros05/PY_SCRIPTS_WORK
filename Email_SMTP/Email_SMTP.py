@@ -13,10 +13,10 @@ def Email():
     body = "Hi,\n\nPlease find the attached CSV report.\n\nBest regards,\nPython Script"
 
     # Path to the CSV file in Downloads
-    csv_filename = "excel.csv"  # Replace with your actual file name
+    xlsx_filename = "Exports.xlsx"  # Replace with your actual file name
     #downloads_path = os.path.abspath(csv_filename)
     current_file=Path(__file__).resolve()
-    target_file=current_file.parent / "excel.csv"
+    target_file=current_file.parent.parent / "JSON_to_EXCEL" / "Exports.xlsx"
 
     # Create the email message
     message = MIMEMultipart()
@@ -31,8 +31,8 @@ def Email():
     # Attach the CSV file
     try:
         with open(target_file, "rb") as file:
-            part = MIMEApplication(file.read(), Name=csv_filename)
-            part['Content-Disposition'] = f'attachment; filename="{csv_filename}"'
+            part = MIMEApplication(file.read(), Name=xlsx_filename)
+            part['Content-Disposition'] = f'attachment; filename="{xlsx_filename}"'
             message.attach(part)
     except FileNotFoundError:
         print(f"Error: File not found at {target_file}")

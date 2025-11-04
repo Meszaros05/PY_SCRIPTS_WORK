@@ -1,60 +1,60 @@
 import requests
-import json
-import os
+import pandas as pd
+import urllib3
+from datetime import datetime
 from pathlib import Path
-import re
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# Constants
+SERVER = "clarotyemc.nhy.hydro.com"
+USER = "API_admin"
+PASSWORD = "Admin123!"
+VERIFY_SSL = False
 
-#OUTPUT_FILE'S NAME SHOULD BE NAMED AS IT IS DOWNLOADED FROM BROWSER
+def get_token():
+    response = requests.post(
+        f"https://{SERVER}/auth/authenticate",
+        json={"username": USER, "password": PASSWORD},
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"},
+        verify=VERIFY_SSL
 
-def Download_JSON(api_url="https://your-claroty-instance/api/v1/assets", api_token="", output_file="claroty_data.json"):
-
-    #api_url = "https://your-claroty-instance/api/v1/assets"
-    #api_token = "your_api_token_here"
-    """
-    Downloads JSON data from the Claroty API and saves it to a file.
-
-    Parameters:
-        api_url (str): The API endpoint URL.
-        api_token (str): The bearer token for authentication.
-        output_file (str): The filename to save the JSON data.
-
-    Returns:
-        bool: True if successful, False otherwise.
-    """
-
-    #Delete existing .JSON file
-    pattern = re.compile(r".*\.json$", re.IGNORECASE)
-    main_folder_path=Path(__file__).resolve().parent
-    json_files=[f for f in main_folder_path.iterdir() if pattern.match(f.name)]
+    )
     
-    if json_files:
-        for file in json_files:
-            try:
-                os.remove(file)
-            except Exception as e:
-                print(f"Failed to delete {file}:{e}")
+    data = response.json()
+    return data.get("token")  #==> need to be called
 
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    }
+def fetch_sites(token):
+    response=requests.get(
+        f"https://{SERVER}/ranger/sites",
+        headers={
+            "Authorization": token,
+            "Accept":"Application/json"
+            },
+        params={"page": 1, "per_page": 100},
+        verify=VERIFY_SSL,
+        
+    )
+    download_path=Path(r"C:\Users\a829052\Downloads")
+    filename=f"downloadsasd.json"
+    filepath=download_path/filename
 
-    try:
-        response = requests.get(api_url, headers=headers)
-        response.raise_for_status()
-        data = response.json()
-
-        with open(output_file, "w") as f:
-            json.dump(data, f, indent=4)
-
-        print(f"✅ JSON data saved to {output_file}")
-        return True
-
-    except requests.exceptions.RequestException as e:
-        print(f"❌ Failed to fetch data: {e}")
-        return False
+    with open(filepath,"w",encoding="utf-8") as f:
+        f.write(response.text)
+    response.raise_for_status()
+    return response.json()
 
 
-Download_JSON()
+
+
+def main_API_Handler():
+    token = get_token()
+    print(token)
+    fetch_sites(token)
+    
+    
+
+if __name__ == "__main__":
+    main_API_Handler()

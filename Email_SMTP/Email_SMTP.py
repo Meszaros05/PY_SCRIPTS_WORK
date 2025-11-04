@@ -16,7 +16,7 @@ def Email():
     xlsx_filename = "Exports.xlsx"  # Replace with your actual file name
     #downloads_path = os.path.abspath(csv_filename)
     current_file=Path(__file__).resolve()
-    target_file=current_file.parent.parent / "JSON_to_EXCEL" / "Exports.xlsx"
+    target_file=current_file.parent.parent / "Exports.xlsx"
 
     # Create the email message
     message = MIMEMultipart()

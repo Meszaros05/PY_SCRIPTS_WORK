@@ -56,5 +56,4 @@ def main_API_Handler():
     
     
 
-if __name__ == "__main__":
-    main_API_Handler()
+

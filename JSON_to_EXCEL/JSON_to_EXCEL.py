@@ -71,5 +71,3 @@ def Convert_JSON_to_EXCEL ():
 
 
 #convert_JSON_to_EXCEL()
-main_API_Handler()
-Convert_JSON_to_EXCEL()

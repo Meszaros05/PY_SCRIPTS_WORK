@@ -38,7 +38,7 @@ def Email():
         target_file=max(target_file_folder.glob("Exports*.xlsx"), key=lambda f: f.stat().st_mtime)
         # Email configuration
         sender_email = "zabbix_server@hydro.com"
-        receiver_email = "gergely.fekete@hydro.com"
+        receiver_email = "norbert.nagy.1@hydro.com"
         subject = "CSV Report Attached"
         body = "Hi,\n\nPlease find the attached CSV report.\n\nBest regards,\nPython Script"
 
